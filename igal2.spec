@@ -1,18 +1,21 @@
-Name:    	igal2
+%define	oname	igal
+
+Name:		igal2
 Version: 	2.0
-Release: 	1
+Release: 	2
 License: 	GPLv2
 Group:		Text tools
 URL:		http://igal.trexler.at/
 Source0: 	http://igal.trexler.at/%{name}-%{version}.tar.gz
 Patch0:		igal2.patch
+Patch1:		igal2-2.0-fix-destdir-and-fhs-paths.patch
 Summary: 	Easy and flexible online Image GALlery generator
-BuildArch:      noarch
+BuildArch:	noarch
 
-%rename igal
+%rename		%{oname}
 
 Requires: 	perl
-Requires:	ImageMagic
+Requires:	ImageMagick
 
 %description
 Igal2 is a quick, easy and flexible program meant to help you place your
@@ -21,29 +24,19 @@ slides even with its default settings -- which can otherwise be easily
 changed with a good number of command-line options or by altering igal2's
 HTML and CSS template files.
 
-
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1 -b .fhs~
 
 %install
-mkdir -p %{buildroot}/%{_bindir}
-mkdir -p %{buildroot}/%{_mandir}/man1
-mkdir -p %{buildroot}/%{_libdir}/%{name}
-mkdir -p %{buildroot}/%{_docdir}/%{name}
-
-install -p -m 0755 %{name} %{buildroot}/%{_bindir}
-install -p -m 0755 utilities/%{name}.sh %{buildroot}/%{_bindir}
-install -p -m 0644 %{name}.1 %{buildroot}/%{_mandir}/man1
-install -p -m 0644 README ChangeLog %{buildroot}/%{_docdir}/%{name}
-install -p -m 0644 indextemplate2.html slidetemplate2.html tile.png igal2.css directoryline2.html %{buildroot}/%{_libdir}/%{name}
-
-%clean
+%makeinstall_std
 
 %files
+%doc README ChangeLog
+%{_bindir}/%{oname}
 %{_bindir}/%{name}
 %{_bindir}/%{name}.sh
-%{_libdir}/%{name}/*
+%dir %{_datadir}/%{name}
+%{_datadir}/%{name}/*
 %{_mandir}/man1/%{name}.1*
-%doc README ChangeLog
-
