@@ -39,7 +39,6 @@ install -p -m 0644 README ChangeLog %{buildroot}/%{_docdir}/%{name}
 install -p -m 0644 indextemplate2.html slidetemplate2.html tile.png igal2.css directoryline2.html %{buildroot}/%{_libdir}/%{name}
 
 %clean
-rm -rf %{buildroot}
 
 %files
 %{_bindir}/%{name}
