@@ -1,20 +1,20 @@
 %define	oname	igal
 
 Name:		igal2
-Version: 	2.0
-Release: 	2
-License: 	GPLv2
+Version:	2.1
+Release:	1
+License:	GPLv2+
 Group:		Text tools
 URL:		http://igal.trexler.at/
-Source0: 	http://igal.trexler.at/%{name}-%{version}.tar.gz
+Source0:	http://igal.trexler.at/%{name}-%{version}.tar.gz
 Patch0:		igal2.patch
 Patch1:		igal2-2.0-fix-destdir-and-fhs-paths.patch
-Summary: 	Easy and flexible online Image GALlery generator
+Summary:	Easy and flexible online Image GALlery generator
 BuildArch:	noarch
 
 %rename		%{oname}
 
-Requires: 	perl
+Requires:	perl
 Requires:	ImageMagick
 
 %description
@@ -24,6 +24,7 @@ slides even with its default settings -- which can otherwise be easily
 changed with a good number of command-line options or by altering igal2's
 HTML and CSS template files.
 
+
 %prep
 %setup -q
 %patch0 -p1
@@ -31,12 +32,15 @@ HTML and CSS template files.
 
 %install
 %makeinstall_std
+rm -f %{buildroot}%{_datadir}/%{name}/{README,ChangeLog,COPYING}
+install -m 755 utilities/igal2-recursive.sh %{buildroot}%{_bindir}
 
 %files
-%doc README ChangeLog
+%doc ChangeLog
 %{_bindir}/%{oname}
 %{_bindir}/%{name}
 %{_bindir}/%{name}.sh
+%{_bindir}/%{name}-recursive.sh
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/*
 %{_mandir}/man1/%{name}.1*
