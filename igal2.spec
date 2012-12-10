@@ -2,7 +2,7 @@
 
 Name:		igal2
 Version:	2.1
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Text tools
 URL:		http://igal.trexler.at/
@@ -15,7 +15,7 @@ BuildArch:	noarch
 %rename		%{oname}
 
 Requires:	perl
-Requires:	ImageMagick
+Requires:	imagemagick
 
 %description
 Igal2 is a quick, easy and flexible program meant to help you place your
@@ -44,3 +44,25 @@ install -m 755 utilities/igal2-recursive.sh %{buildroot}%{_bindir}
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/*
 %{_mandir}/man1/%{name}.1*
+
+
+%changelog
+* Sun Jul 01 2012 Johnny A. Solbu <solbu@mandriva.org> 2.1-1
++ Revision: 807659
+- New version
+- Spec cleanup
+- Fix licence
+- Fix mixed-use-of-spaces-and-tabs
+- README contains install instruction, so we'll drop it.
+- Docs are installed in the wrong place, moving to correct location
+
+* Tue Jul 12 2011 Per Øyvind Karlsen <peroyvind@mandriva.org> 2.0-2
++ Revision: 689759
+- fix DESTDIR support and FHS compliance in Makefile (P1)
+
+  + Johnny A. Solbu <solbu@mandriva.org>
+    - More spec cleanup
+    - Imported package
+    - Spec cleanup
+    - import igal2
+
