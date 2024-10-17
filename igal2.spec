@@ -5,7 +5,7 @@ Version:	2.1
 Release:	3
 License:	GPLv2+
 Group:		Text tools
-URL:		http://igal.trexler.at/
+URL:		https://igal.trexler.at/
 Source0:	http://igal.trexler.at/%{name}-%{version}.tar.gz
 Patch0:		igal2.patch
 Patch1:		igal2-2.0-fix-destdir-and-fhs-paths.patch
